@@ -9,7 +9,7 @@ Apply this workflow before editing code.
 
 1. Inspect repository instructions, nearby code, `modinfo.lua`, `modmain.lua`, and relevant project documentation. Treat project conventions as authoritative unless they conflict with the user request or verified engine behavior.
 2. Classify every affected path as frontend-only, client simulation, master simulation, or shared prefab initialization. State which side owns each mutation.
-3. Search the repository and, when available, the installed game scripts for an analogous Klei implementation. Prefer verified local APIs over remembered signatures.
+3. Locate the local DST official-script source before relying on a remembered API. Check the project-provided source path first, then `template/scripts` under the project root, `../template/scripts` beside the mod directory, and the installed game's `data/databundles/scripts.zip`. Read the analogous Klei implementation and at least one call site when available; otherwise state that the source was unavailable.
 4. Make the smallest coherent change. Preserve unrelated user edits and existing public interfaces.
 5. Review networking, lifecycle cleanup, save/load, shard behavior, and asset registration as applicable.
 6. Run available syntax/static checks and focused tests. Report any behavior that still requires in-game verification.
@@ -25,7 +25,7 @@ Read only the references relevant to the task:
 - Particle VFX, envelopes, emitters, dedicated-server behavior, and visual cleanup: [particles-fx.md](references/particles-fx.md)
 - `modinfo.lua`, configuration options, localization, mod dependencies, and release packaging: [modpackaging.md](references/modpackaging.md)
 - Characters, items, equipment, recipes, containers, buffs, combat, and loot: [gameplay-systems.md](references/gameplay-systems.md)
-- Script environments, `GLOBAL`, engine objects, world queries, physics, and bounded source lookup: [engine-environment.md](references/engine-environment.md)
+- Script environments, `GLOBAL`, engine objects, world queries, physics, and official-source discovery: [engine-environment.md](references/engine-environment.md)
 - Code quality, investigation, validation, and delivery checklist: [quality-testing.md](references/quality-testing.md)
 
 ## Enforce core invariants
