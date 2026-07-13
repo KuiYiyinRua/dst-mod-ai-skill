@@ -51,6 +51,10 @@ Copy-Item .\dst-mod-ai-skill\dst-mod-development "$HOME\.codex\skills\dst-mod-de
 
 它不替代具体项目的规则。项目内的 `AGENTS.md`、已有架构文档和已验证的游戏脚本调用方式优先。
 
+## 官方源码定位
+
+Skill 会优先读取项目说明中指定的 DST 官方脚本副本；未指定时依次探测项目根目录下的 `template/scripts`、模组父目录下的 `template/scripts`，以及 DST 安装目录中的 `data/databundles/scripts.zip` 或已解压脚本目录。找到后，Agent 会读取相关定义和调用点来确认 API、生命周期及客户端/服务端边界；找不到时会明确说明，并退回到项目已有调用点。
+
 ## 维护原则
 
 Skill 保持“核心流程 + 按需参考”的结构：把项目私有规则放在项目中，把可迁移的 DST 经验放进这里；对不确定的 API，应优先在本地游戏脚本或现有调用点中验证，而不是凭记忆编写。
