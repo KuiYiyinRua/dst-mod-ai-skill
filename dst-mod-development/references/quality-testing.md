@@ -18,6 +18,18 @@ When game scripts are available locally, verify uncertain APIs there. Check call
 
 Do not apply a universal `GLOBAL` rule. `modmain.lua`, prefab modules, widgets, and imported modules can receive different environments. Follow working neighboring code and verify how the file is loaded. Avoid lint-only rewrites that could change runtime lookup behavior.
 
+## Debug without destabilizing the server
+
+Prefix logs with a stable mod/system identifier and log state transitions or failures, not every update tick. Gate verbose diagnostics behind a configuration/debug flag. Never print authentication data, private player data, full serialized saves, or unbounded tables.
+
+Use `pcall` only at optional integration or external-data boundaries where recovery is meaningful. Do not wrap core gameplay broadly and silently discard errors; preserve a useful traceback/log and keep state atomic. Remove temporary console commands and debug hooks before release, or protect admin-only commands with server-side permission checks.
+
+## Enforce performance budgets
+
+Treat `AddPrefabPostInitAny`, component-action collectors, brain nodes, stategraph timelines, `DoPeriodicTask`, world-state watchers, and UI update loops as hot paths. Filter by tags/prefab/component as early as possible. Cache immutable lookups, but invalidate caches whose entity/config inputs can change.
+
+Prefer events, timers, sleep/wake, and component-owned updates over per-frame polling. Bound entity searches by radius, required/excluded tags, frequency, and result count. Test worst-case player/entity counts and repeated mass spawning; watch both server tick rate and client rendering cost.
+
 ## Validate proportionally
 
 Run repository-provided checks first. If available, use a Lua parser/linter compatible with the project's Lua dialect. Review the diff and search for stale renamed identifiers.
@@ -31,6 +43,9 @@ In-game validation matrix:
 5. Surface/caves migration when relevant.
 6. High latency or repeated input for RPC/action work.
 7. Mod enabled beside likely integration points.
+8. Entity sleep/wake, inventory limbo, and long update when the feature owns background work.
+9. World creation/regeneration when worldgen, tiles, presets, or spawn rules change.
+10. Keyboard/mouse and controller paths when input or UI changes.
 
 Inspect both server and client logs. A clean host test does not prove remote-client correctness.
 
