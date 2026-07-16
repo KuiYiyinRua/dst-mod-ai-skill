@@ -29,11 +29,17 @@ For every client-to-server RPC:
 
 Never accept client-computed damage, cost, rewards, inventory removal, or success results as authoritative.
 
+Namespace RPC names and keep argument order/version stable. For request/response flows, include a bounded correlation identifier only when simultaneous requests are possible; reject stale or duplicate requests. Do not serialize arbitrary Lua tables or executable data through strings.
+
+Use shard RPCs only for communication between world processes. Validate payloads again on the receiving shard and design for delay, duplicate delivery, missing shards, and player migration during the request.
+
 ## Replicas and UI
 
 Use a component for server behavior and a replica for client-readable state or action tests. Keep their public method semantics aligned. Guard component access by execution side; guard replica access by existence.
 
 Widgets should subscribe to replicated state, render it, and clean up callbacks in their teardown path. Avoid polling when a dirty event exists. A widget may use globals made available by its actual environment, but never rely on UI code for authoritative mutation or persistence.
+
+Place private owner-only data on the appropriate classified entity rather than a world-visible entity. Treat netvar ranges and string sizes as protocol constraints: clamp before `:set`, avoid high-frequency large strings, and split state semantically rather than building an unbounded serialized blob.
 
 ## Prediction
 
