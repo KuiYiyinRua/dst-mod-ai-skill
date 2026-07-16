@@ -17,6 +17,9 @@
 | `references/modpackaging.md` | `modinfo.lua`、配置、本地化、依赖与发布打包 |
 | `references/gameplay-systems.md` | 角色、物品、装备、配方、容器、Buff、战斗与掉落 |
 | `references/engine-environment.md` | `GLOBAL`、脚本环境、引擎对象、世界查询和物理 |
+| `references/worldgen.md` | `modworldgenmain.lua`、房间/任务/预设、自定义地皮与世界生成 |
+| `references/ai-behavior.md` | Brain、行为树、BufferedAction、生物状态图与 AI 性能 |
+| `references/frontend-audio-input.md` | 前端/HUD、键鼠与控制器、声音、皮肤、地图图标和命令 |
 | `references/quality-testing.md` | 检索、Lua 质量与联机验证矩阵 |
 
 ## 安装
@@ -46,7 +49,9 @@ Copy-Item .\dst-mod-ai-skill\dst-mod-development "$HOME\.codex\skills\dst-mod-de
 
 - 客户端意图、服务端权威、RPC、网络变量和 Replica
 - 角色、Prefab、组件、Action、状态图、装备、Buff 和容器
+- 生物 Brain/行为树、世界生成、自定义房间/任务/地皮和运行时世界生成
 - `modinfo.lua`、配置项、本地化、资源、动画、粒子 FX、UI
+- 键盘/鼠标/控制器输入、声音包、皮肤、地图图标和用户/管理命令
 - 存档/读档、回档、洞穴分片、专用服务器和远端客户端兼容性
 
 它不替代具体项目的规则。项目内的 `AGENTS.md`、已有架构文档和已验证的游戏脚本调用方式优先。
