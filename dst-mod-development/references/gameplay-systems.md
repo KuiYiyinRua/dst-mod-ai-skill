@@ -18,6 +18,8 @@ Use the current project/API recipe-registration pattern. Keep product prefab nam
 
 When changing an existing recipe, preserve save compatibility for existing items and avoid relying on recipe display state as an authorization check.
 
+For cooking, drying, farming, and ingredient tags, use the corresponding official registration helpers and inspect current recipe schemas. Keep cookbook data, test functions, priorities, perish values, and product names consistent across server and client.
+
 ## Implement buffs and combat effects
 
 Represent a buff with an appropriate component/debuff/prefab lifecycle instead of only tags. Define application, refresh/stack rules, expiration, removal, death behavior, save/load behavior, and network/UI projection. Avoid a periodic task per entity when an existing timer/debuff mechanism fits.
@@ -27,6 +29,8 @@ For combat, validate attacker, target, distance, targetability, PvP mode, immuni
 ## Spawn loot and world content
 
 Make drops server-authoritative and idempotent across death/removal callbacks. Clamp probabilities and quantities; account for stacks, inventory overflow, no-drop tags, and rollback. Scope world spawning by shard and avoid world-wide scans in hot paths.
+
+For structures, deployables, boats/platforms, and map-targeted abilities, validate placement through the world's map and deployment rules on the server. Handle passability, ocean/land, platform-relative coordinates, blocking, ownership, destruction, burning, hammering, haunting, and regrowth only when relevant to the prefab.
 
 ## Review matrix
 
