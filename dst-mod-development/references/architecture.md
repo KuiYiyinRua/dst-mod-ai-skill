@@ -33,6 +33,14 @@ Pair these operations:
 
 Prefer fields or components for private state. Use tags only when engine queries, action discovery, or replication semantics genuinely require tags. Never generate unbounded dynamic tag names.
 
+## Handle sleep, wake, limbo, and long updates
+
+DST can stop simulating distant entities. If an entity owns periodic work, sounds, particles, targeting, or brain activity, decide whether it should pause in `OnEntitySleep` and resume in `OnEntityWake`. Make repeated sleep/wake calls safe and do not create duplicate tasks.
+
+Account for `enterlimbo`/`exitlimbo` when inventory or held entities must suspend world behavior. Long-duration timers and production systems may need `OnLongUpdate` or an engine component that already handles offline time. Do not simulate elapsed time by running thousands of missed ticks after load.
+
+Separate removal cleanup from sleep cleanup: sleeping entities still exist and may wake; removed entities must release all references permanently.
+
 ## Actions and stategraphs
 
 Keep action discovery cheap and side-effect free. Validate the action again when executed. Define consistent `strfn`, range, priority, mount/ghost rules, and component-action registration.
