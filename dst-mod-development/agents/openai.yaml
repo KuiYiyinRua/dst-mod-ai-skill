@@ -1,4 +1,4 @@
 interface:
   display_name: "DST Mod Development"
-  short_description: "Build and review reliable multiplayer DST mods"
-  default_prompt: "Use $dst-mod-development to implement this DST mod change safely for multiplayer."
+  short_description: "Build and review production-ready DST mods"
+  default_prompt: "Use $dst-mod-development to implement or review this DST mod change against official source and multiplayer constraints."
